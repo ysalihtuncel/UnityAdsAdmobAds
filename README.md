@@ -22,7 +22,7 @@ Usage:
       );  
       
       
-      **Showing interstital AD**:  
+      <strong>Showing interstital AD</strong>:  
       SRTAdManager.ShowIntersititialAd();  
         
       **Showing rewarded AD**:  

@@ -1,9 +1,16 @@
 # UnityAdsAdmobAds
-Unity Ads and Admob Ads same time 
+##Unity Ads and Admob Ads same time 
+
+##Required
+###Unity Advertisement 4.1.3
+###GoogleMobileAds-v7.0.0.unitypackage
 
 
-# Usage:
-Initialize SRTAdManager with:
+A script that allows Unity Ads and Admob to be used together. It is not waterfall or meditation. In order to use this, you must have the Advertisment and GoogleMobileAds plugins in your Unity project.
+
+
+## Usage:
+###Initialize SRTAdManager with:
       
 	SRTAdManager.Initialize(  
 		BannerAD, //Banner Ad type Unity or Admob  
@@ -23,9 +30,13 @@ Initialize SRTAdManager with:
 	);  
       
       
-# Showing interstital AD:  
-      SRTAdManager.ShowIntersititialAd();  
-        
-# Showing rewarded AD:  
-      SRTAdManager.ShowRewardedAd();  
+## How to show ads? 
+
+#### Interstital ad
+
+SRTAdManager.ShowIntersititialAd();
+
+#### Rewarded Ad
+
+SRTAdManager.ShowRewardedAd();
       

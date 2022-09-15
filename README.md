@@ -23,9 +23,9 @@ Initialize SRTAdManager with:
 	);  
       
       
-#Showing interstital AD:  
+# Showing interstital AD:  
       SRTAdManager.ShowIntersititialAd();  
         
-#Showing rewarded AD:  
+# Showing rewarded AD:  
       SRTAdManager.ShowRewardedAd();  
       

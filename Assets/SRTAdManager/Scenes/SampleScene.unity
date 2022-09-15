@@ -758,9 +758,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b3af9ff5234014d9d2b36c156b1d85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BannerAD: 0
+  BannerAD: 1
   InterstitalAD: 2
-  RewardedAD: 2
+  RewardedAD: 3
   AdmobInterstitalCount: 3
   AdmobRewardCount: 2
   UnityInterstitalCount: 3

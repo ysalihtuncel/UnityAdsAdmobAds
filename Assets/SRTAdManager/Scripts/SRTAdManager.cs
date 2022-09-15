@@ -16,6 +16,7 @@ public class SRTAdManager : MonoBehaviour
     int AdmobRewardedCounter = 0, UnityRewardedCounter = 0;
     [SerializeField] int AdmobInterstitalCount = 0, UnityInterstitalCount = 0;
     [SerializeField] int AdmobRewardedCount = 0, UnityRewardedCount = 0;
+    private bool isInitialized = false;
 
     void Awake()
     {
@@ -39,7 +40,7 @@ public class SRTAdManager : MonoBehaviour
     /// <summary>
     /// U = UNITY, A = ADMOB
     /// </summary>
-    public void Initialize(AdSource banner, AdSource interstitial, AdSource rewarded,
+    public static void Initialize(AdSource banner, AdSource interstitial, AdSource rewarded,
                     int AInterstitalCount, int ARewardedCount,
                     int UInterstitalCount, int URewardedCount,
                     string ABannerID, string AInterstitialID, string ARewardedID,
@@ -47,86 +48,89 @@ public class SRTAdManager : MonoBehaviour
     {
         if (instance != null)
         {
-            this.interstitalSource = interstitial;
-            this.rewardedSource = rewarded;
-            if (banner == AdSource.Mixed) {
-                banner = AdSource.UnityAds;
+            if (!instance.isInitialized) {
+                instance.isInitialized = true;
+                instance.interstitalSource = interstitial;
+                instance.rewardedSource = rewarded;
+                if (banner == AdSource.Mixed) {
+                    banner = AdSource.UnityAds;
+                }
+                //INITIALIZE FIELD
+                switch (interstitial)
+                {
+                    case AdSource.Mixed:
+                        instance.AdmobInterstitalCount = AInterstitalCount;
+                        instance.UnityInterstitalCount = UInterstitalCount;
+                        instance.unityAdManager.Initialize(instance.SRTDecoder(UBannerID), instance.SRTDecoder(UInterstitialID), instance.SRTDecoder(URewardedID), testMode);
+                        instance.admobAdManager.Initialize(instance.SRTDecoder(ABannerID), instance.SRTDecoder(AInterstitialID), instance.SRTDecoder(ARewardedID), testMode);
+                        // ADMOB initialize
+                        break;
+                    case AdSource.AdmobAds:
+                        instance.admobAdManager.Initialize(instance.SRTDecoder(ABannerID), instance.SRTDecoder(AInterstitialID), instance.SRTDecoder(ARewardedID), testMode);
+                        // ADMOB initialize
+                        break;
+                    case AdSource.UnityAds:
+                        instance.unityAdManager.Initialize(instance.SRTDecoder(UBannerID), instance.SRTDecoder(UInterstitialID), instance.SRTDecoder(URewardedID), testMode);
+                        break;
+                    default:
+                        break;
+                }
+                //END INITIALIZE
+                if (instance.rewardedSource == AdSource.Mixed) {
+                    instance.AdmobRewardedCount = ARewardedCount;
+                    instance.UnityRewardedCount = URewardedCount;
+                }
+    
+                //BANNER LOAD FIELD
+                switch (banner)
+                {
+                    case AdSource.AdmobAds:
+                        instance.LoadAdmobBannerAD();
+                        break;
+                    case AdSource.UnityAds:
+                        instance.LoadUnityBannerAD();
+                        break;
+                    default:
+                        break;
+                }
+                //END BANNER LOAD
+    
+                //INTERSTITAL LOAD FIELD
+                switch (interstitial)
+                {
+                    case AdSource.Mixed:
+                        instance.LoadAdmobInterstitalAD();
+                        instance.LoadUnityInterstitalAD();
+                        break;
+                    case AdSource.AdmobAds:
+                        instance.LoadAdmobInterstitalAD();
+                        break;
+                    case AdSource.UnityAds:
+                        instance.LoadUnityInterstitalAD();
+                        break;
+                    default:
+                        break;
+                }
+                //END INTERSTITIAL FIELD
+    
+                //REWARDED LOAD FIELD
+                switch (rewarded)
+                {
+                    case AdSource.Mixed:
+                        instance.LoadAdmobRewardedAD();
+                        instance.LoadUnityRewardedAD();
+                        break;
+                    case AdSource.AdmobAds:
+                        instance.LoadAdmobRewardedAD();
+                        break;
+                    case AdSource.UnityAds:
+                        instance.LoadUnityRewardedAD();
+                        break;
+                    default:
+                        break;
+                }
+                //REWARDED INTERSTITIAL FIELD
             }
-            //INITIALIZE FIELD
-            switch (interstitial)
-            {
-                case AdSource.Mixed:
-                    this.AdmobInterstitalCount = AInterstitalCount;
-                    this.UnityInterstitalCount = UInterstitalCount;
-                    unityAdManager.Initialize(SRTDecoder(UBannerID), SRTDecoder(UInterstitialID), SRTDecoder(URewardedID), testMode);
-                    admobAdManager.Initialize(SRTDecoder(ABannerID), SRTDecoder(AInterstitialID), SRTDecoder(ARewardedID), testMode);
-                    // ADMOB initialize
-                    break;
-                case AdSource.AdmobAds:
-                    admobAdManager.Initialize(SRTDecoder(ABannerID), SRTDecoder(AInterstitialID), SRTDecoder(ARewardedID), testMode);
-                    // ADMOB initialize
-                    break;
-                case AdSource.UnityAds:
-                    unityAdManager.Initialize(SRTDecoder(UBannerID), SRTDecoder(UInterstitialID), SRTDecoder(URewardedID), testMode);
-                    break;
-                default:
-                    break;
-            }
-            //END INITIALIZE
-            if (rewardedSource == AdSource.Mixed) {
-                this.AdmobRewardedCount = ARewardedCount;
-                this.UnityRewardedCount = URewardedCount;
-            }
-
-            //BANNER LOAD FIELD
-            switch (banner)
-            {
-                case AdSource.AdmobAds:
-                    LoadAdmobBannerAD();
-                    break;
-                case AdSource.UnityAds:
-                    LoadUnityBannerAD();
-                    break;
-                default:
-                    break;
-            }
-            //END BANNER LOAD
-
-            //INTERSTITAL LOAD FIELD
-            switch (interstitial)
-            {
-                case AdSource.Mixed:
-                    LoadAdmobInterstitalAD();
-                    LoadUnityInterstitalAD();
-                    break;
-                case AdSource.AdmobAds:
-                    LoadAdmobInterstitalAD();
-                    break;
-                case AdSource.UnityAds:
-                    LoadUnityInterstitalAD();
-                    break;
-                default:
-                    break;
-            }
-            //END INTERSTITIAL FIELD
-
-            //REWARDED LOAD FIELD
-            switch (rewarded)
-            {
-                case AdSource.Mixed:
-                    LoadAdmobRewardedAD();
-                    LoadUnityRewardedAD();
-                    break;
-                case AdSource.AdmobAds:
-                    LoadAdmobRewardedAD();
-                    break;
-                case AdSource.UnityAds:
-                    LoadUnityRewardedAD();
-                    break;
-                default:
-                    break;
-            }
-            //REWARDED INTERSTITIAL FIELD
         }
     }
 

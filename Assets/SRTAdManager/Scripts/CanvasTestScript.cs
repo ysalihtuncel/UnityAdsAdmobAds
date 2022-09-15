@@ -20,8 +20,7 @@ public class CanvasTestScript : MonoBehaviour
 
     [SerializeField] bool testMode = true;
     void Start() {
-        SRTAdManager adManager = FindObjectOfType<SRTAdManager>();
-        adManager.Initialize(
+        SRTAdManager.Initialize(
             BannerAD,
             InterstitalAD,
             RewardedAD,

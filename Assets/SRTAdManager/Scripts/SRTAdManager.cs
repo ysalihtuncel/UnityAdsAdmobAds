@@ -40,6 +40,20 @@ public class SRTAdManager : MonoBehaviour
     /// <summary>
     /// U = UNITY, A = ADMOB
     /// </summary>
+    /// <param name="banner">Banner Ad Type</param>
+    /// <param name="interstitial">Interstital Ad Type</param>
+    /// <param name="rewarded">Rewarded Ad Type</param>
+    /// <param name="AInterstitalCount">if ad type mixed: How many time/times show Admob interstital ad</param>
+    /// <param name="ARewardedCount">if ad type mixed: How many time/times show Admob rewarded ad</param>
+    /// <param name="UInterstitalCount">if ad type mixed: How many time/times show Unity interstital ad</param>
+    /// <param name="URewardedCount">if ad type mixed: How many time/times show Unity rewarded ad</param>
+    /// <param name="ABannerID">Admob Banner ID</param>
+    /// <param name="AInterstitialID">Admob Interstital ID</param>
+    /// <param name="ARewardedID">Admob Rewarded ID</param>
+    /// <param name="UBannerID">Unity Banner ID</param>
+    /// <param name="UInterstitialID">Unity Interstital ID</param>
+    /// <param name="URewardedID">Unity Rewarded ID</param>
+    /// <param name="testMode">Ads Mode if is test set true</param>
     public static void Initialize(AdSource banner, AdSource interstitial, AdSource rewarded,
                     int AInterstitalCount, int ARewardedCount,
                     int UInterstitalCount, int URewardedCount,

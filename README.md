@@ -1,16 +1,15 @@
-# UnityAdsAdmobAds
-## Unity Ads and Admob Ads same time 
+# Unity Ads and Admob Ads same time
 
-## Required
-### Unity Advertisement 4.1.3  
-### GoogleMobileAds-v7.0.0.unitypackage  
+### Required
+#### Unity Advertisement 4.1.3  
+#### GoogleMobileAds-v7.0.0.unitypackage  
 
 
 A script that allows Unity Ads and Admob to be used together. It is not waterfall or meditation. In order to use this, you must have the Advertisment and GoogleMobileAds plugins in your Unity project.  
   
   
-## Usage:
-### Initialize SRTAdManager with:
+### Usage:
+#### Initialize SRTAdManager with:
       
 	SRTAdManager.Initialize(  
 		BannerAD, //Banner Ad type Unity or Admob  
